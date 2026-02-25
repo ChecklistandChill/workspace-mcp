@@ -177,4 +177,4 @@ configure_server_for_http()
 
 # Export server instance for FastMCP CLI (looks for 'mcp', 'server', or 'app')
 mcp = server
-app = server
+app = server.streamable_http_app()
