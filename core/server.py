@@ -42,8 +42,7 @@ session_middleware = Middleware(MCPSessionMiddleware)
 class SecureFastMCP(FastMCP):
     def streamable_http_app(self) -> "Starlette":
         """Override to add secure middleware stack for OAuth 2.1."""
-        app = self.app
-        # Add middleware in order (first added = outermost layer)
+        app = self        # Add middleware in order (first added = outermost layer)
         # Session Management - extracts session info for MCP context
         app.user_middleware.insert(0, session_middleware)
 
