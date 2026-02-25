@@ -1,0 +1,4 @@
+[phases.install]
+cmds = ["pip install -r requirements.txt"]
+[start]
+cmd = "uvicorn fastmcp_server:app --host 0.0.0.0 --port $PORT"
