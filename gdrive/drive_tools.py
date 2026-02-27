@@ -587,7 +587,7 @@ async def create_drive_file(
             running_streamable = transport_mode == "streamable-http"
             if running_streamable:
                 logger.warning(
-                    "[create_drive_file] file:// URL requested while server runs in streamable-http mode. Ensure the file path is accessible to the server (e.g., Docker volume) or use an HTTP(S) URL."
+                    "[create_drive_file] file:// URL requested while server runs in streamable-http mode. Ensure the file path is accessible to the server or use an HTTP(S) URL."
                 )
 
             # Convert file:// URL to a cross-platform local path
@@ -601,14 +601,14 @@ async def create_drive_file(
             path_obj = validate_file_path(file_path)
             if not path_obj.exists():
                 extra = (
-                    " The server is running via streamable-http, so file:// URLs must point to files inside the container or remote host."
+                    " The server is running via streamable-http, so file:// URLs must point to files accessible on the remote host."
                     if running_streamable
                     else ""
                 )
                 raise Exception(f"Local file does not exist: {file_path}.{extra}")
             if not path_obj.is_file():
                 extra = (
-                    " In streamable-http/Docker deployments, mount the file into the container or provide an HTTP(S) URL."
+                    " In streamable-http deployments, ensure the file is accessible on the server or provide an HTTP(S) URL."
                     if running_streamable
                     else ""
                 )
