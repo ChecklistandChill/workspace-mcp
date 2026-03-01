@@ -198,3 +198,13 @@ appscript:
     - list_script_processes
     - get_script_metrics
   complete: []
+
+gumroad:
+  core:
+    - list_products
+    - get_product
+    - create_product
+  extended:
+    - update_product
+    - delete_product
+  complete: []
