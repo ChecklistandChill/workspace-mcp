@@ -82,11 +82,37 @@ def wrap_server_tool_method(server):
 def filter_server_tools(server):
     """Remove disabled tools from the server after registration.
 
-    Bridges sync callers to the async implementation.
+    Bridges sync callers to the async implementation.  When called from
+    inside a running event loop (e.g. module import under an ASGI server),
+    the coroutine is executed in a background thread with its own loop to
+    avoid "asyncio.run() cannot be called from a running event loop".
     """
     import asyncio
+    import threading
 
-    asyncio.run(_filter_server_tools_async(server))
+    try:
+        asyncio.get_running_loop()
+        is_loop_running = True
+    except RuntimeError:
+        is_loop_running = False
+
+    if is_loop_running:
+        _exc = None
+
+        def _run():
+            nonlocal _exc
+            try:
+                asyncio.run(_filter_server_tools_async(server))
+            except Exception as e:
+                _exc = e
+
+        t = threading.Thread(target=_run)
+        t.start()
+        t.join()
+        if _exc:
+            raise _exc
+    else:
+        asyncio.run(_filter_server_tools_async(server))
 
 
 async def _filter_server_tools_async(server):
