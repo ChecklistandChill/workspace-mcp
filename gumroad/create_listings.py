@@ -31,93 +31,170 @@ GUMROAD_API_BASE = "https://api.gumroad.com/v2"
 PRODUCTS = [
     {
         "drive_file_id": "1Xy12--WrU3KX3nHurGJN6M99I4s0y0IC",
-        "name": "Is Homeownership Right for You? (Free Chapter 1)",
+        "name": "The Homebuyer Guide — Chapter 1 (Free)",
         "price": 0,
         "url_slug": "checklist-and-chill-chapter-1-free",
-        "description": """<h2>Your homebuying journey starts here — and it's completely free.</h2>
-
-<p>Chapter 1 of the <strong>Checklist & Chill Homebuyer Guide</strong> walks you through the very first question every aspiring homeowner faces: <em>Is now actually the right time for me to buy?</em></p>
-
-<p>Written in plain English — no jargon, no pressure — this chapter helps you cut through the noise and figure out where you really stand before you ever talk to a lender or tour a single home.</p>
-
-<h3>What's inside:</h3>
-<ul>
-  <li>The honest questions to ask yourself before starting the homebuying process</li>
-  <li>How to separate emotional readiness from financial readiness</li>
-  <li>A clear-eyed look at what the homebuying process actually involves (so nothing surprises you later)</li>
-  <li>How this guide is structured — and how to use it to build real confidence, one chapter at a time</li>
-</ul>
-
-<p>This is the foundation chapter. Everything that comes next — the money prep, the mortgage math, the house hunt — makes a lot more sense once you've worked through this first.</p>
-
-<p><strong>100% free. No catch.</strong> Just download, read at your own pace, and decide if homeownership is the next move for you.</p>
-
-<p><em>From Checklist & Chill — calm, practical homebuying guidance for real people.</em></p>""",
+        "description": (
+            "<p>Buying a home is one of the biggest financial decisions most people "
+            "make. And most of the stress doesn't come from the process itself — it "
+            "comes from not knowing what the process actually looks like before "
+            "you're in the middle of it.</p>"
+            "\n\n"
+            "<p>This is Chapter 1 of the Checklist &amp; Chill Homebuyer Guide. "
+            "It covers the very first question: <em>should I even be thinking about "
+            "buying right now?</em></p>"
+            "\n\n"
+            "<p>No scare tactics. No pressure. Just a calm, structured starting "
+            "point.</p>"
+            "\n\n"
+            "<h3>What's inside</h3>"
+            "<ul>"
+            "<li>How to tell the difference between emotional readiness and "
+            "financial readiness (they're not the same thing)</li>"
+            "<li>The real timeline of a home purchase — so you know what you're "
+            "actually signing up for</li>"
+            "<li>Honest questions to sit with before you talk to a lender or "
+            "start browsing listings</li>"
+            "<li>How the rest of the guide is structured, so you can decide if "
+            "it's worth continuing</li>"
+            "</ul>"
+            "\n\n"
+            "<p>This works because it gives you one clear place to start — "
+            "instead of 47 browser tabs and conflicting advice from everyone "
+            "you know.</p>"
+            "\n\n"
+            "<p>You don't have to do this perfectly. You just have to start "
+            "with the right questions.</p>"
+            "\n\n"
+            "<p><strong>Free. No email required.</strong></p>"
+            "\n\n"
+            "<p><em>Clinician-designed structure. Real-world application. "
+            "Built by a Board-Certified Music Therapist (MT-BC) using principles "
+            "from behavioral science and cognitive accessibility design — "
+            "translated into practical, step-by-step tools for first-time "
+            "homebuyers.</em></p>"
+            "\n\n"
+            "<p><em>Checklist &amp; Chill provides educational materials only "
+            "and does not offer medical, mental health, legal, or financial "
+            "advice.</em></p>"
+        ),
     },
     {
         "drive_file_id": "1CYauIMAFsYuoyG4CxPuYnxSukZwroTCh",
         "name": "Homeowner Readiness Checklist Pack",
         "price": 0,
         "url_slug": "homeowner-readiness-checklist-pack",
-        "description": """<h2>Stop guessing. Start knowing exactly where you stand.</h2>
-
-<p>The <strong>Homeowner Readiness Checklist Pack</strong> from Checklist & Chill is a practical, fillable PDF toolkit designed to help first-time homebuyers get organized, get clear, and move forward with confidence.</p>
-
-<p>This isn't a vague to-do list. Every worksheet targets a real sticking point in the homebuying process — the stuff that trips people up before they even get to the house-hunting stage.</p>
-
-<h3>What's included:</h3>
-<ul>
-  <li><strong>Cash to Close Snapshot</strong> — Map out exactly how much cash you need: down payment, closing costs, upfront expenses, and your post-move cushion</li>
-  <li><strong>DTI Cheat Sheet</strong> — Calculate your debt-to-income ratio and see how your current debts affect how much home you can qualify for</li>
-  <li><strong>Homeownership Readiness Checklist</strong> — A step-by-step checklist covering financial prep, credit, savings, and next steps</li>
-  <li><strong>Bonus reference materials</strong> — Key terms defined simply so you're never lost in a lender conversation</li>
-</ul>
-
-<h3>Perfect for you if:</h3>
-<ul>
-  <li>You're 6–18 months away from wanting to buy and want to get ahead of the prep</li>
-  <li>You're not sure how much you actually need saved (hint: it's more than just the down payment)</li>
-  <li>You want a clear picture of your financial position before talking to a lender</li>
-  <li>You're a visual person who thinks better when things are written down</li>
-</ul>
-
-<p>Works perfectly alongside the <em>Checklist & Chill Homebuyer Guide</em> — but the worksheets are useful on their own too.</p>
-
-<p><strong>Free to download. Yours to keep.</strong></p>
-
-<p><em>From Checklist & Chill — calm, practical homebuying guidance for real people.</em></p>""",
+        "description": (
+            "<p>Before you talk to a lender, before you tour a single house — "
+            "there's a layer of prep that most first-time buyers skip. Not because "
+            "they don't care, but because nobody told them it existed.</p>"
+            "\n\n"
+            "<p>The Homeowner Readiness Checklist Pack is a set of fillable PDF "
+            "worksheets that help you see your financial picture clearly before "
+            "you're under pressure to make decisions fast.</p>"
+            "\n\n"
+            "<p>Think of it as an external brain for the money side of buying "
+            "a home. Everything laid out. Nothing left floating in your head.</p>"
+            "\n\n"
+            "<h3>What's in the pack</h3>"
+            "<ul>"
+            "<li><strong>Cash to Close Snapshot</strong> — Map out your real "
+            "numbers: down payment, closing costs, move-in expenses, and the "
+            "post-close cushion most people forget about</li>"
+            "<li><strong>DTI Cheat Sheet</strong> — Your debt-to-income ratio "
+            "is one of the first things a lender checks. This worksheet helps "
+            "you calculate yours before they do</li>"
+            "<li><strong>Homeownership Readiness Checklist</strong> — A "
+            "step-by-step walkthrough of financial prep, credit, savings targets, "
+            "and the order to do them in</li>"
+            "<li><strong>Key terms reference</strong> — Plain-language definitions "
+            "so you're not Googling mid-conversation with your loan officer</li>"
+            "</ul>"
+            "\n\n"
+            "<h3>Good fit if</h3>"
+            "<ul>"
+            "<li>You're somewhere in the 6–18 month window before buying and "
+            "want to get ahead of the prep</li>"
+            "<li>You're not sure how much you actually need saved (it's more "
+            "than the down payment — the worksheets show you the full picture)</li>"
+            "<li>Your brain works better when things are written down and "
+            "visible, not floating around as mental to-do items</li>"
+            "</ul>"
+            "\n\n"
+            "<p>This works because it externalizes the decisions. Your brain "
+            "doesn't have to hold everything at once — the worksheets hold it "
+            "for you.</p>"
+            "\n\n"
+            "<p>Works alongside the Checklist &amp; Chill Homebuyer Guide, "
+            "but the pack stands on its own too.</p>"
+            "\n\n"
+            "<p><strong>Free. Yours to keep.</strong></p>"
+            "\n\n"
+            "<p><em>Clinician-designed structure. Real-world application. "
+            "Built by a Board-Certified Music Therapist (MT-BC) using principles "
+            "from behavioral science and cognitive accessibility design — "
+            "translated into practical decision-support tools for first-time "
+            "homebuyers.</em></p>"
+            "\n\n"
+            "<p><em>Checklist &amp; Chill provides educational materials only "
+            "and does not offer medical, mental health, legal, or financial "
+            "advice.</em></p>"
+        ),
     },
     {
         "drive_file_id": "11lbR9vGBoMPouEEWFmCLfsLOiK64mRzP",
         "name": "Rent vs. Buy Snapshot",
         "price": 0,
         "url_slug": "rent-vs-buy-snapshot",
-        "description": """<h2>One page. One decision. Total clarity.</h2>
-
-<p>The <strong>Rent vs. Buy Snapshot</strong> is a clean, no-fluff one-page reference from Checklist & Chill that helps you quickly compare where you stand — financially and practically — on the rent vs. buy question.</p>
-
-<p>Because the real answer isn't "buying is always better" or "renting is throwing money away." The real answer depends on <em>your</em> numbers, <em>your</em> timeline, and <em>your</em> life — and this snapshot helps you see that clearly.</p>
-
-<h3>What it covers:</h3>
-<ul>
-  <li>The key financial factors that actually tip the scale toward buying vs. renting</li>
-  <li>The break-even framework — how long you'd need to stay to make buying worth it</li>
-  <li>Hidden costs of both renting and owning that most comparisons skip</li>
-  <li>A simple self-assessment so you can honestly evaluate your own situation</li>
-</ul>
-
-<h3>Use it to:</h3>
-<ul>
-  <li>Cut through the noise when family and friends all have different opinions</li>
-  <li>Ground a conversation with your partner about your actual options</li>
-  <li>Figure out if now is the right time — or if waiting makes more financial sense</li>
-</ul>
-
-<p>Quick to read. Easy to reference. Built for the early stage of the decision — before you're deep in mortgage math or house tours.</p>
-
-<p><strong>Free download. No email required.</strong></p>
-
-<p><em>From Checklist & Chill — calm, practical homebuying guidance for real people.</em></p>""",
+        "description": (
+            "<p>\"Should I rent or buy?\" is one of those questions where "
+            "everyone has an opinion — and most of those opinions leave out "
+            "the parts that actually matter for your situation.</p>"
+            "\n\n"
+            "<p>The Rent vs. Buy Snapshot is a one-page reference that helps "
+            "you compare the two options using your real numbers, your real "
+            "timeline, and your real life — not someone else's.</p>"
+            "\n\n"
+            "<p>Because the honest answer isn't always \"buy.\" Sometimes "
+            "renting is the smarter move. This snapshot helps you see which "
+            "one it is right now, for you.</p>"
+            "\n\n"
+            "<h3>What it covers</h3>"
+            "<ul>"
+            "<li>The financial factors that actually tip the scale — and the "
+            "ones that sound important but don't</li>"
+            "<li>A break-even framework: how long you'd need to stay to make "
+            "buying worth the upfront costs</li>"
+            "<li>Hidden costs on both sides that most rent-vs-buy calculators "
+            "skip</li>"
+            "<li>A short self-check so you can honestly evaluate where you "
+            "stand today</li>"
+            "</ul>"
+            "\n\n"
+            "<h3>Use it when</h3>"
+            "<ul>"
+            "<li>You're early in the decision and want a grounded starting "
+            "point — not a sales pitch</li>"
+            "<li>You want something concrete to look at with a partner or "
+            "family member instead of going back and forth</li>"
+            "<li>You need to figure out whether \"not yet\" is the right "
+            "call — and feel good about it</li>"
+            "</ul>"
+            "\n\n"
+            "<p>Quick to read. Easy to come back to. Built for the thinking "
+            "stage — before you're deep in mortgage math.</p>"
+            "\n\n"
+            "<p><strong>Free. No email required.</strong></p>"
+            "\n\n"
+            "<p><em>Evidence-informed decision tools for overwhelmed brains "
+            "navigating real life. Built by a Board-Certified Music Therapist "
+            "(MT-BC) using principles from behavioral science and cognitive "
+            "accessibility design.</em></p>"
+            "\n\n"
+            "<p><em>Checklist &amp; Chill provides educational materials only "
+            "and does not offer medical, mental health, legal, or financial "
+            "advice.</em></p>"
+        ),
     },
 ]
 
