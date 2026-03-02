@@ -24,7 +24,7 @@ from auth.oauth_config import set_transport_mode
 logger = logging.getLogger(__name__)
 
 
-def get_registered_tools(server) -> Dict[str, Any]:
+async def get_registered_tools(server) -> Dict[str, Any]:
     """
     Get all registered tools from the FastMCP server.
 
@@ -36,16 +36,16 @@ def get_registered_tools(server) -> Dict[str, Any]:
     """
     tools = {}
 
-    if hasattr(server, "_tool_manager") and hasattr(server._tool_manager, "_tools"):
-        tool_registry = server._tool_manager._tools
-        for name, tool in tool_registry.items():
-            tools[name] = {
-                "name": name,
-                "description": getattr(tool, "description", None)
-                or _extract_docstring(tool),
-                "parameters": _extract_parameters(tool),
-                "tool_obj": tool,
-            }
+    tool_list = await server.list_tools()
+    for mcp_tool in tool_list:
+        tool_obj = await server.get_tool(mcp_tool.name)
+        tools[mcp_tool.name] = {
+            "name": mcp_tool.name,
+            "description": getattr(tool_obj, "description", None)
+            or _extract_docstring(tool_obj),
+            "parameters": _extract_parameters(tool_obj),
+            "tool_obj": tool_obj,
+        }
 
     return tools
 
@@ -86,7 +86,7 @@ def _extract_parameters(tool) -> Dict[str, Any]:
     return params
 
 
-def list_tools(server, output_format: str = "text") -> str:
+async def list_tools(server, output_format: str = "text") -> str:
     """
     List all available tools.
 
@@ -97,7 +97,7 @@ def list_tools(server, output_format: str = "text") -> str:
     Returns:
         Formatted string listing all tools
     """
-    tools = get_registered_tools(server)
+    tools = await get_registered_tools(server)
 
     if output_format == "json":
         # Return JSON format for programmatic use
@@ -145,7 +145,7 @@ def list_tools(server, output_format: str = "text") -> str:
     return "\n".join(lines)
 
 
-def show_tool_help(server, tool_name: str) -> str:
+async def show_tool_help(server, tool_name: str) -> str:
     """
     Show detailed help for a specific tool.
 
@@ -156,7 +156,7 @@ def show_tool_help(server, tool_name: str) -> str:
     Returns:
         Formatted help string for the tool
     """
-    tools = get_registered_tools(server)
+    tools = await get_registered_tools(server)
 
     if tool_name not in tools:
         available = ", ".join(sorted(tools.keys())[:10])
@@ -220,7 +220,7 @@ async def run_tool(server, tool_name: str, args: Dict[str, Any]) -> str:
     Returns:
         Tool result as a string
     """
-    tools = get_registered_tools(server)
+    tools = await get_registered_tools(server)
 
     if tool_name not in tools:
         raise ValueError(f"Tool '{tool_name}' not found")
@@ -380,12 +380,12 @@ async def handle_cli_mode(server, cli_args: List[str]) -> int:
         parsed = parse_cli_args(cli_args)
 
         if parsed["command"] == "list":
-            output = list_tools(server, parsed["output_format"])
+            output = await list_tools(server, parsed["output_format"])
             print(output)
             return 0
 
         if parsed["command"] == "help":
-            output = show_tool_help(server, parsed["tool_name"])
+            output = await show_tool_help(server, parsed["tool_name"])
             print(output)
             return 0
 

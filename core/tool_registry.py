@@ -80,66 +80,71 @@ def wrap_server_tool_method(server):
 
 
 def filter_server_tools(server):
-    """Remove disabled tools from the server after registration."""
+    """Remove disabled tools from the server after registration.
+
+    Bridges sync callers to the async implementation.
+    """
+    import asyncio
+
+    asyncio.run(_filter_server_tools_async(server))
+
+
+async def _filter_server_tools_async(server):
+    """Async implementation of tool filtering using public FastMCP APIs."""
     enabled_tools = get_enabled_tools()
     oauth21_enabled = is_oauth21_enabled()
     if enabled_tools is None and not oauth21_enabled:
         return
 
     tools_removed = 0
+    read_only_mode = is_read_only_mode()
+    allowed_scopes = set(get_all_read_only_scopes()) if read_only_mode else None
 
-    # Access FastMCP's tool registry via _tool_manager._tools
-    if hasattr(server, "_tool_manager"):
-        tool_manager = server._tool_manager
-        if hasattr(tool_manager, "_tools"):
-            tool_registry = tool_manager._tools
+    tool_list = await server.list_tools()
+    tool_names = {t.name for t in tool_list}
+    tools_to_remove = set()
 
-            read_only_mode = is_read_only_mode()
-            allowed_scopes = set(get_all_read_only_scopes()) if read_only_mode else None
+    # 1. Tier filtering
+    if enabled_tools is not None:
+        for tool_name in tool_names:
+            if not is_tool_enabled(tool_name):
+                tools_to_remove.add(tool_name)
 
-            tools_to_remove = set()
+    # 2. OAuth 2.1 filtering
+    if oauth21_enabled and "start_google_auth" in tool_names:
+        tools_to_remove.add("start_google_auth")
+        logger.info("OAuth 2.1 enabled: disabling start_google_auth tool")
 
-            # 1. Tier filtering
-            if enabled_tools is not None:
-                for tool_name in list(tool_registry.keys()):
-                    if not is_tool_enabled(tool_name):
-                        tools_to_remove.add(tool_name)
+    # 3. Read-only mode filtering
+    if read_only_mode:
+        for tool_name in tool_names:
+            if tool_name in tools_to_remove:
+                continue
 
-            # 2. OAuth 2.1 filtering
-            if oauth21_enabled and "start_google_auth" in tool_registry:
-                tools_to_remove.add("start_google_auth")
-                logger.info("OAuth 2.1 enabled: disabling start_google_auth tool")
+            tool_obj = await server.get_tool(tool_name)
+            func_to_check = tool_obj
+            if hasattr(tool_obj, "fn"):
+                func_to_check = tool_obj.fn
 
-            # 3. Read-only mode filtering
-            if read_only_mode:
-                for tool_name in list(tool_registry.keys()):
-                    if tool_name in tools_to_remove:
-                        continue
+            required_scopes = getattr(
+                func_to_check, "_required_google_scopes", []
+            )
 
-                    tool_func = tool_registry[tool_name]
-                    # Check if tool has required scopes attached (from @require_google_service)
-                    # Note: FastMCP wraps functions in Tool objects, so we need to check .fn if available
-                    func_to_check = tool_func
-                    if hasattr(tool_func, "fn"):
-                        func_to_check = tool_func.fn
-
-                    required_scopes = getattr(
-                        func_to_check, "_required_google_scopes", []
+            if required_scopes:
+                if not all(
+                    scope in allowed_scopes for scope in required_scopes
+                ):
+                    logger.info(
+                        f"Read-only mode: Disabling tool '{tool_name}' (requires write scopes: {required_scopes})"
                     )
+                    tools_to_remove.add(tool_name)
 
-                    if required_scopes:
-                        # If ANY required scope is not in the allowed read-only scopes, disable the tool
-                        if not all(
-                            scope in allowed_scopes for scope in required_scopes
-                        ):
-                            logger.info(
-                                f"Read-only mode: Disabling tool '{tool_name}' (requires write scopes: {required_scopes})"
-                            )
-                            tools_to_remove.add(tool_name)
-
-            for tool_name in tools_to_remove:
-                del tool_registry[tool_name]
-                tools_removed += 1
+    for tool_name in tools_to_remove:
+        if hasattr(server, "local_provider"):
+            server.local_provider.remove_tool(tool_name)
+        else:
+            server.remove_tool(tool_name)
+        tools_removed += 1
 
     if tools_removed > 0:
         enabled_count = len(enabled_tools) if enabled_tools is not None else "all"

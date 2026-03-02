@@ -183,6 +183,7 @@ uv run main.py --tools gmail drive
 | `MCP_ENABLE_OAUTH21` | Set to `true` for OAuth 2.1 support |
 | `EXTERNAL_OAUTH21_PROVIDER` | Set to `true` for external OAuth flow with bearer tokens (requires OAuth 2.1) |
 | `WORKSPACE_MCP_STATELESS_MODE` | Set to `true` for stateless operation (requires OAuth 2.1) |
+| `GUMROAD_ACCESS_TOKEN` | API access token for Gumroad product management |
 
 </td></tr>
 </table>
@@ -343,6 +344,19 @@ export GOOGLE_PSE_ENGINE_ID=yyy
 <sub>Optional: Search API setup</sub>
 
 </td>
+</tr>
+<tr>
+<td width="33%" align="center">
+
+**🛒 Gumroad**
+```bash
+export GUMROAD_ACCESS_TOKEN=\
+  your-gumroad-token
+```
+<sub>Optional: Gumroad product management</sub>
+
+</td>
+<td colspan="2"></td>
 </tr>
 </table>
 
@@ -1079,6 +1093,23 @@ Saved files expire after 1 hour and are cleaned up automatically.
 | `update_deployment` | Extended | Update deployment configuration |
 | `delete_deployment` | Extended | Remove deployment |
 | `list_script_processes` | Extended | View recent executions and status |
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top">
+
+### 🛒 **Gumroad** <sub>[`gumroad_tools.py`](gumroad/gumroad_tools.py)</sub>
+
+| Tool | Tier | Description |
+|------|------|-------------|
+| `list_products` | **Core** | List all products in your Gumroad store |
+| `get_product` | **Core** | Get details of a single product |
+| `create_product` | **Core** | Create a new product |
+| `update_product` | Extended | Update an existing product |
+| `delete_product` | Extended | Delete a product |
+
+> **Note**: Gumroad tools require a `GUMROAD_ACCESS_TOKEN` environment variable. Generate one from your [Gumroad application settings](https://app.gumroad.com/settings/advanced#application-form).
 
 </td>
 </tr>
